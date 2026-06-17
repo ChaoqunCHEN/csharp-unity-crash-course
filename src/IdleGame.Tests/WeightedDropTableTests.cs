@@ -1,4 +1,5 @@
 using IdleGame.Domain;
+using Xunit;
 
 namespace IdleGame.Tests;
 
@@ -15,7 +16,8 @@ public class WeightedDropTableTests
             .Select(seed => table.Roll(new Random(seed)))
             .ToHashSet();
 
-        Assert.Subset(new HashSet<string> { "gold", "chest" }, seen);
+        var configured = new HashSet<string> { "gold", "chest" };
+        Assert.All(seen, item => Assert.Contains(item, configured));
     }
 
     [Fact]

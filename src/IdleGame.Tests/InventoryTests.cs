@@ -1,4 +1,5 @@
 using IdleGame.Domain;
+using Xunit;
 
 namespace IdleGame.Tests;
 

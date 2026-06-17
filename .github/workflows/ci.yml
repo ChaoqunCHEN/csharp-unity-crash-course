@@ -14,7 +14,9 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
-      - name: Restore
+      - name: Restore console
+        run: dotnet restore src/Day1.ConsolePlayground/Day1.ConsolePlayground.csproj
+      - name: Restore tests
         run: dotnet restore src/IdleGame.Tests/IdleGame.Tests.csproj
       - name: Build
         run: dotnet build src/Day1.ConsolePlayground/Day1.ConsolePlayground.csproj --configuration Release --no-restore
