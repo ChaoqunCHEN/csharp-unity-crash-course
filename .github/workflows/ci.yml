@@ -1,0 +1,47 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  dotnet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Restore
+        run: dotnet restore src/IdleGame.Tests/IdleGame.Tests.csproj
+      - name: Build
+        run: dotnet build src/Day1.ConsolePlayground/Day1.ConsolePlayground.csproj --configuration Release --no-restore
+      - name: Test
+        run: dotnet test src/IdleGame.Tests/IdleGame.Tests.csproj --configuration Release --no-restore --verbosity normal
+
+  markdown:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Basic markdown link sanity
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          missing = []
+          for path in Path('.').rglob('*.md'):
+              text = path.read_text(encoding='utf-8')
+              for target in re.findall(r'\[[^\]]+\]\((?!https?://|mailto:|#)([^)]+)\)', text):
+                  clean = target.split('#', 1)[0]
+                  if not clean:
+                      continue
+                  candidate = (path.parent / clean).resolve()
+                  if not candidate.exists():
+                      missing.append(f"{path}: {target}")
+          if missing:
+              print("Missing local markdown links:")
+              print("\n".join(missing))
+              raise SystemExit(1)
+          PY
