@@ -1,62 +1,63 @@
 # C# + Unity Crash Course Plan
 
-## 目标
+## Goal
 
-为有 Go、Python、Java 经验的软件工程师创建一个 2 天速成教程，目标不是完整掌握 C# 或 Unity，而是能读懂常见代码、写简单功能、并能更自信地用 AI 辅助编写 C# / Unity 原型。
+Create a two-day fast-track tutorial for experienced Go, Python, and Java engineers who want enough C# and Unity fluency to read code, write small features, and vibe-code C# / Unity prototypes with confidence.
 
-## 受众假设
+## Audience Assumptions
 
-- 已熟悉变量、函数、类、接口、泛型、异常、异步等通用编程概念。
-- 不需要解释“什么是 OOP”，但需要解释 C# 和 Unity 的惯用写法。
-- 首选 macOS + VS Code / Cursor / Rider + .NET SDK + Unity Hub；Windows 作为补充路径。
+- The reader already understands variables, functions, classes, interfaces, generics, exceptions, async concepts, and basic testing.
+- The tutorial should not explain programming from scratch; it should translate existing engineering knowledge into C# and Unity idioms.
+- macOS is first-class: VS Code / Cursor / Rider, .NET SDK, Unity Hub, and Unity LTS. Windows instructions are included as a secondary path.
 
-## 范围
+## Scope
 
-Day 1 聚焦 C# 与 .NET：
+Day 1 focuses on C# and .NET:
 
-- `dotnet` 项目结构、`.csproj`、命名空间、类、方法。
-- 类型系统、`var`、字符串、nullable reference types、属性、构造函数、record、enum。
-- 集合、LINQ、接口、泛型、扩展方法、异常。
-- `async` / `await`、`Task`、delegate、`Action`、`Func`、event。
-- 可运行控制台示例和可测试的 idle-game domain logic。
+- `dotnet` project structure, `.csproj`, namespaces, classes, and methods.
+- Types, `var`, strings, nullable reference types, properties, constructors, records, and enums.
+- Collections, LINQ, interfaces, generics, extension methods, and exceptions.
+- `async` / `await`, `Task`, delegates, `Action`, `Func`, and events.
+- Runnable console examples and testable idle-game domain logic.
 
-Day 2 聚焦 Unity C#：
+Day 2 focuses on Unity-oriented C#:
 
-- GameObject + Component、Scene、Prefab、Inspector。
-- MonoBehaviour 生命周期、`[SerializeField]`、`transform`、`Time.deltaTime`。
-- Coroutine、UnityEvent / C# event、ScriptableObject、UI 绑定、JSON 存档。
-- Mini Idle Clicker 脚本与编辑器搭建步骤。
+- GameObject + Component, Scene, Prefab, and Inspector.
+- MonoBehaviour lifecycle, `[SerializeField]`, `transform`, and `Time.deltaTime`.
+- Coroutines, UnityEvent / C# events, ScriptableObject, UI binding, and JSON save/load.
+- Mini Idle Clicker scripts and step-by-step Unity Editor setup.
 
-## 代码与验证策略
+## Code and Verification Strategy
 
-- 使用 .NET 8 `net8.0` 作为目标框架。
-- Unity 示例保持为脚本和 mini-project 结构，不要求 CI 安装或启动 Unity Editor。
-- CI 在 GitHub Actions Ubuntu 上执行 `.NET restore/build/test`，并做基础 Markdown 链接检查。
-- 本地如果安装了 .NET SDK，可运行：
+- Target .NET 8 with `net8.0`.
+- Keep Unity examples as scripts and a mini-project folder structure. CI does not install or launch Unity Editor.
+- GitHub Actions validates the .NET projects on Ubuntu and performs a basic Markdown local-link check.
+- With a local .NET SDK installed, run:
 
 ```bash
 ./scripts/test.sh
 dotnet run --project src/Day1.ConsolePlayground
 ```
 
-## 仓库交付物
+## Repository Deliverables
 
-- `README.md`：macOS first-class setup、Windows setup、2-day schedule、运行方式、Unity 使用方式、后续学习路径。
-- `docs/day1-csharp/`：Day 1 教程章节。
-- `docs/day2-unity/`：Day 2 教程章节。
-- `src/`：可运行 console playground、domain library、unit tests。
-- `unity/MiniIdleClicker/`：Unity 脚本和导入说明。
-- `exercises/`：Day 1 / Day 2 starter 与 solution。
-- `cheatsheets/`：C# 对照速查、Unity C# 速查。
-- `.github/workflows/ci.yml`：CI。
+- `README.md`: setup, schedule, run commands, Unity usage, and next steps.
+- `docs/day1-csharp/`: Day 1 C# lessons.
+- `docs/day2-unity/`: Day 2 Unity lessons.
+- `src/`: runnable console playground, domain library, and tests.
+- `unity/MiniIdleClicker/`: Unity scripts and import instructions.
+- `exercises/`: Day 1 and Day 2 starters and solutions.
+- `cheatsheets/`: C# and Unity C# quick references.
+- `.github/workflows/ci.yml`: CI.
 
-## 计划提交历史
+## Planned Commit History
 
 1. `chore: initial scaffold`
 2. `docs: add day1 csharp tutorial`
-3. `docs: add day2 unity tutorial`
-4. `feat: add exercises and final review`
+3. `docs: switch tutorial to english`
+4. `docs: add day2 unity tutorial`
+5. `feat: add exercises and final review`
 
-## 当前环境说明
+## Current Environment Note
 
-当前机器只有 .NET runtime，没有 .NET SDK，因此本地无法执行 `dotnet restore/build/test`。仓库会包含完整 `.NET 8` 项目和 GitHub Actions CI；最终会尝试推送到 GitHub 触发远端验证。
+This machine currently has a .NET runtime but no .NET SDK, so local `dotnet restore/build/test` cannot run here. The repository still includes complete .NET 8 project files and GitHub Actions CI; after push, remote CI is the authoritative build/test validation.

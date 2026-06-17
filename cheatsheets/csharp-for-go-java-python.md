@@ -23,8 +23,8 @@
 - Python `list[str]` -> C# `List<string>`
 - Java Stream `filter/map` -> C# LINQ `Where/Select`
 - Java record -> C# `record`
-- Python `None` -> C# `null`, but nullable analysis can warn you earlier
-- Go error return -> C# often uses exceptions or `TryXxx` pattern
+- Python `None` -> C# `null`, with nullable analysis for earlier warnings
+- Go error return -> C# often uses exceptions or the `TryXxx` pattern
 
 ## LINQ Essentials
 

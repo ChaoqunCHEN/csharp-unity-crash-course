@@ -1,65 +1,65 @@
 # 06. Day 1 Exercises
 
-这些练习对应 `src/IdleGame.Domain` 和 `exercises/day1`。建议先自己写 starter，再对照 solution。
+These exercises map to `src/IdleGame.Domain` and `exercises/day1`. Try the starter version first, then compare with the solution.
 
 ## 1. Inventory System
 
-目标：实现可堆叠背包。
+Goal: implement a stackable inventory.
 
-要求：
+Requirements:
 
-- `Add(string itemId, int amount)` 增加数量。
-- `Remove(string itemId, int amount)` 成功返回 `true`，数量不足返回 `false`。
-- `CountOf(string itemId)` 查询数量。
-- 空 ID 和非正数量要抛异常。
+- `Add(string itemId, int amount)` increases a stack.
+- `Remove(string itemId, int amount)` returns `true` on success and `false` when there are not enough items.
+- `CountOf(string itemId)` returns the current count.
+- Empty IDs and non-positive amounts should throw.
 
-Checkpoint：运行 `InventoryTests`。
+Checkpoint: run `InventoryTests`.
 
 ## 2. Weighted Drop Table
 
-目标：实现按权重抽奖。
+Goal: implement weighted random drops.
 
-要求：
+Requirements:
 
-- 支持链式 `.Add("gold", 95).Add("chest", 5)`。
-- 权重必须大于 0。
-- `Roll(Random rng)` 使用传入的随机数，方便测试。
+- Support chained calls such as `.Add("gold", 95).Add("chest", 5)`.
+- Weight must be greater than zero.
+- `Roll(Random rng)` should use the provided random instance so tests can be deterministic.
 
-Checkpoint：解释为什么测试里不应该依赖“跑 100 次大概率会出现 rare”。
+Checkpoint: explain why a test should not rely on "run 100 times and a rare drop will probably appear."
 
 ## 3. Offline Reward Calculation
 
-目标：根据离线时间计算收益。
+Goal: calculate rewards from offline time.
 
-要求：
+Requirements:
 
-- 输入 `lastSeen`、`now`、`coinsPerSecond`。
-- 时钟倒退时返回 0。
-- 支持 `maxOffline` 封顶。
+- Input `lastSeen`, `now`, and `coinsPerSecond`.
+- Return zero if the clock moves backward.
+- Support a `maxOffline` cap.
 
-Checkpoint：如果玩家离线 2 天，但最多奖励 8 小时，应该得到多少？
+Checkpoint: if a player is offline for 2 days but rewards cap at 8 hours, how many seconds should count?
 
 ## 4. Async Fake API Call
 
-目标：写一个模拟异步 API。
+Goal: write a fake asynchronous API.
 
-要求：
+Requirements:
 
-- 方法名以 `Async` 结尾。
-- 返回 `Task<PlayerProfile>`。
-- 用 `Task.Delay` 模拟网络等待。
-- 支持 `CancellationToken`。
+- Method name ends with `Async`.
+- Return `Task<PlayerProfile>`.
+- Use `Task.Delay` to simulate network latency.
+- Support `CancellationToken`.
 
-Checkpoint：故意去掉 `await`，观察调用端拿到的类型是什么。
+Checkpoint: remove `await` at the call site and inspect the type you get back.
 
 ## 5. Event-Driven Health System
 
-目标：用事件表达生命值变化和死亡。
+Goal: use events for health changes and death.
 
-要求：
+Requirements:
 
-- `Changed` 事件携带当前 HP。
-- `Died` 事件只触发一次。
-- 死亡后继续伤害不再重复触发。
+- `Changed` carries the current HP.
+- `Died` fires once.
+- Further damage after death does not fire more events.
 
-Checkpoint：为什么 `Died` 应该是事件，而不是外部每帧检查 `IsDead`？
+Checkpoint: why is `Died` better as an event than polling `IsDead` every frame?

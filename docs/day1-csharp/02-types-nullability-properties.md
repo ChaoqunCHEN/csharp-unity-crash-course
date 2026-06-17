@@ -2,7 +2,7 @@
 
 ## Concept
 
-C# 是静态类型语言。`var` 只是编译期类型推断：
+C# is statically typed. `var` is compile-time type inference:
 
 ```csharp
 var score = 100;      // int
@@ -10,31 +10,31 @@ var name = "Ada";     // string
 // score = "100";     // compile error
 ```
 
-常见数值类型：
+Common primitive types:
 
-- `int` / `long`：整数。
-- `float`：Unity 中很常见，字面量写 `1.5f`。
-- `double`：默认浮点类型。
-- `decimal`：适合金额，不适合 Unity 高频数值。
-- `bool`、`char`、`string`。
+- `int` / `long`: integers.
+- `float`: common in Unity; write literals as `1.5f`.
+- `double`: default floating-point type.
+- `decimal`: useful for money-like values, not typical Unity gameplay math.
+- `bool`, `char`, `string`.
 
 ## Nullable Reference Types
 
-开启 `<Nullable>enable</Nullable>` 后：
+With `<Nullable>enable</Nullable>`:
 
 ```csharp
-string name = "Ada";       // should not be null
+string name = "Ada";       // expected non-null
 string? nickname = null;   // may be null
 
 var label = nickname ?? "Guest";
 var firstChar = nickname?.FirstOrDefault();
 ```
 
-`?` 是告诉编译器“这里可能为空”。`!` 是告诉编译器“相信我不为空”，不是运行时检查。
+`?` tells the compiler that a reference may be null. `!` tells the compiler "trust me"; it is not a runtime null check.
 
 ## Properties vs Fields
 
-C# property 表面像字段，实际是 getter/setter：
+C# properties look like fields from the outside, but they are getter/setter methods:
 
 ```csharp
 public sealed class Player
@@ -53,7 +53,7 @@ public sealed class Player
 }
 ```
 
-Unity 脚本里常见 private field + `[SerializeField]`，普通 C# domain code 更常见 property。
+Plain C# domain code usually favors properties. Unity Inspector code often uses private fields with `[SerializeField]`.
 
 ## Records and Enums
 
@@ -68,13 +68,13 @@ public enum DamageType
 }
 ```
 
-`record` 适合不可变数据和值语义，接近 Java record / Kotlin data class。
+Records are good for immutable data and value-like equality, similar to Java records or Kotlin data classes.
 
 ## Common Traps
 
-- `string` 仍然是 reference type；nullable 分析不改变运行时。
-- `List<string?>` 和 `List<string>?` 不一样：前者元素可空，后者列表本身可空。
-- `enum` 底层是整数，可能出现未定义值，处理外部输入时要校验。
-- Unity Inspector 不序列化普通 C# property，通常序列化 field。
+- `string` is still a reference type; nullable analysis does not change runtime behavior.
+- `List<string?>` and `List<string>?` mean different things. The first allows null elements; the second allows the list itself to be null.
+- `enum` values are backed by integers. External input can contain undefined enum values unless you validate it.
+- Unity Inspector does not serialize normal C# properties; it serializes fields.
 
-Exercise：写一个 `record UpgradeDefinition(string Id, int BaseCost, float Multiplier)`，再创建 3 个升级配置。
+Exercise: write `record UpgradeDefinition(string Id, int BaseCost, float Multiplier)` and create three upgrade definitions.

@@ -2,7 +2,7 @@
 
 ## Concept
 
-C# 支持完整 OOP，但 Unity 和游戏逻辑都更偏向组合。先用 interface 表达能力，再用小类组合行为。
+C# supports full OOP, but both Unity and game domain code often work best with composition. Use interfaces to express capabilities, then compose small classes.
 
 ```csharp
 public interface IDamageable
@@ -41,7 +41,7 @@ public sealed class Result<T>
 }
 ```
 
-泛型约束让编译器知道 `T` 有什么能力：
+Generic constraints tell the compiler what `T` can do:
 
 ```csharp
 public static T Create<T>() where T : new()
@@ -52,7 +52,7 @@ public static T Create<T>() where T : new()
 
 ## Extension Methods
 
-扩展方法让静态方法看起来像实例方法：
+Extension methods let static methods read like instance methods:
 
 ```csharp
 public static class StringExtensions
@@ -77,13 +77,13 @@ catch (FormatException ex)
 }
 ```
 
-普通分支优先用 `TryParse`，异常用于异常路径。
+Prefer `TryParse` for normal branchy parsing. Use exceptions for exceptional paths.
 
 ## Common Traps
 
-- 扩展方法不能访问 private 成员，也没有真的修改原类型。
-- `catch (Exception)` 太宽，容易吞掉重要错误。
-- `where T : class` 表示 reference type，`where T : struct` 表示 value type。
-- `sealed` 禁止继承，常用于简单 domain class，减少意外扩展点。
+- Extension methods cannot access private members and do not actually modify the original type.
+- `catch (Exception)` is often too broad and can hide important failures.
+- `where T : class` means reference type; `where T : struct` means value type.
+- `sealed` prevents inheritance. It is useful for simple domain classes with no intended extension point.
 
-Exercise：给 `IReadOnlyDictionary<string, int>` 写扩展方法 `TotalItems()`，返回所有数量之和。
+Exercise: write an extension method `TotalItems()` for `IReadOnlyDictionary<string, int>` that returns the sum of all counts.

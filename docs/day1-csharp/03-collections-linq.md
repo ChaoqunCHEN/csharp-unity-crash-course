@@ -2,7 +2,7 @@
 
 ## Concept
 
-常用集合：
+Common collection types:
 
 ```csharp
 var scores = new int[] { 10, 20, 30 };
@@ -11,11 +11,11 @@ var counts = new Dictionary<string, int>();
 var seen = new HashSet<string>();
 ```
 
-泛型写法 `List<T>` 和 Java 类似，比 Go 传统 slice/map 更强调库类型。
+Generic syntax such as `List<T>` is close to Java. Compared with Go slices/maps, C# leans more heavily on library collection types and LINQ extension methods.
 
 ## LINQ
 
-LINQ 是 C# 的集合查询工具。常用方法：
+LINQ is C#'s collection query toolkit:
 
 ```csharp
 var enemies = new List<Enemy>
@@ -37,19 +37,19 @@ var firstSmallEnemy = enemies.FirstOrDefault(enemy => enemy.GoldReward < 3);
 
 ## Why It Matters
 
-AI 生成 C# 时很爱用 LINQ。你需要能读懂链式查询，也要知道什么时候不要用。
+AI-generated C# often uses LINQ. You need to read it fluently and know when to avoid it.
 
 ## Comparisons
 
-- `Where` 类似 Python `filter` / Java Stream `filter`。
-- `Select` 类似 Python map/list comprehension / Java Stream `map`。
-- `IEnumerable<T>` 很多时候是延迟执行，接近 Java Stream 的懒计算。
+- `Where` is similar to Python `filter` or Java Stream `filter`.
+- `Select` is similar to Python `map` / list comprehensions or Java Stream `map`.
+- Many LINQ calls return `IEnumerable<T>` and are lazy, similar to Java streams.
 
 ## Common Traps
 
-- `First()` 找不到会抛异常；`FirstOrDefault()` 对 reference type 可能返回 `null`。
-- LINQ 默认延迟执行，反复枚举可能反复计算。
-- 不要修改正在 `foreach` 的集合。
-- Unity `Update()` 里避免频繁 LINQ，可能产生 GC allocation。
+- `First()` throws if nothing matches; `FirstOrDefault()` may return `null` for reference types.
+- Lazy LINQ queries can re-run work each time you enumerate them.
+- Modifying a collection while iterating it usually throws.
+- Avoid frequent LINQ allocations inside Unity `Update()`.
 
-Exercise：在 `Inventory.Snapshot()` 上用 LINQ 找出数量大于 1 的物品 ID。
+Exercise: use LINQ on `Inventory.Snapshot()` to find item IDs whose count is greater than 1.

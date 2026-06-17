@@ -1,8 +1,8 @@
-# 01. Syntax for Java / Go / Python Devs
+# 01. Syntax for Java / Go / Python Developers
 
 ## Concept
 
-C# 项目通常由一个或多个 `.csproj` 组成。每个项目声明目标框架、依赖和编译设置。`Program.cs` 是常见入口；现代 C# 可以使用 top-level statements，不一定显式写 `Main`。
+C# projects are usually organized as one or more `.csproj` files. Each project declares its target framework, dependencies, and compiler settings. `Program.cs` is a common entry point. Modern C# also supports top-level statements, so you may not see an explicit `Main` method.
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
@@ -31,7 +31,7 @@ public sealed class Enemy
 
 ## Why It Matters
 
-读 C# 仓库时，先看 `.csproj` 和项目之间的 `ProjectReference`。这相当于先搞清楚 Go module / Java Maven module / Python package 的边界。
+When reading a C# repo, first inspect `.csproj` files and `ProjectReference` relationships. That gives you the same kind of orientation as `go.mod`, Maven/Gradle modules, or Python package metadata.
 
 ## Comparisons
 
@@ -40,14 +40,14 @@ public sealed class Enemy
 | `.csproj` | `pom.xml` / `build.gradle` | `go.mod` | `pyproject.toml` |
 | `namespace` | `package` | package | module/package |
 | `using` | `import` | `import` | `import` |
-| `internal` | package-private 接近但不相同 | unexported name | `_private` convention |
+| `internal` | similar to package-private, but assembly-scoped | unexported name | `_private` convention |
 
 ## Common Traps
 
-- C# 文件名不强制等于类名，但团队通常保持一致。
-- 类成员默认是 `private`；Java 的默认 package-private 在 C# 里不是默认行为。
-- top-level statements 隐藏了 `Main`，但程序仍然有入口。
-- `using` 是导入 namespace，不代表依赖已经被包管理器安装。
+- C# file names do not have to match class names, but teams usually keep them aligned.
+- Class members are `private` by default. Java's package-private default does not exist in the same way.
+- Top-level statements hide `Main`, but the compiled program still has an entry point.
+- `using` imports a namespace; it does not install a package.
 
 ## Example
 
@@ -61,4 +61,4 @@ public static class DamageMath
 }
 ```
 
-Checkpoint：打开 `src/Day1.ConsolePlayground/Program.cs`，找出哪些类型来自 `IdleGame.Domain`。
+Checkpoint: open `src/Day1.ConsolePlayground/Program.cs` and identify which types come from `IdleGame.Domain`.

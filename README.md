@@ -1,5 +1,5 @@
 # C# + Unity Crash Course
 
-面向 Go / Python / Java 工程师的 2 天 C# + Unity 速成教程。
+A two-day fast-track tutorial for experienced Go, Python, and Java engineers who want practical C# and Unity fluency.
 
-> Scaffold in progress. Full tutorial content lives in `docs/`, runnable C# examples live in `src/`, and Unity scripts live in `unity/`.
+> Work in progress in this repository build. Lessons live in `docs/`, runnable C# examples live in `src/`, and Unity scripts live in `unity/`.

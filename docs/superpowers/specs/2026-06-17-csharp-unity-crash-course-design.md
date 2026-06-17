@@ -2,7 +2,7 @@
 
 ## Requirements
 
-Create a polished self-guided GitHub tutorial repo named `csharp-unity-crash-course` for experienced Go, Python, and Java engineers. Explanations are in Chinese. Code and comments stay in English where that is natural.
+Create a polished self-guided GitHub tutorial repo named `csharp-unity-crash-course` for experienced Go, Python, and Java engineers. The tutorial language is English. Code and comments are English.
 
 The tutorial must be completable on macOS, with Windows instructions as a secondary path. It must not require Unity Editor in CI. It must include runnable .NET examples, unit tests for non-Unity domain logic, Unity scripts that compile conceptually in a normal Unity LTS project, exercises, cheatsheets, and GitHub Actions.
 
@@ -39,7 +39,7 @@ Domain tests cover:
 - offline reward calculation
 - health event behavior
 
-Tests avoid Unity dependencies and can run on Ubuntu in GitHub Actions with `.NET 8`.
+Tests avoid Unity dependencies and can run on Ubuntu in GitHub Actions with .NET 8.
 
 ## Risks and Mitigations
 
