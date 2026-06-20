@@ -13,6 +13,7 @@ TestResults/
 # VS Code
 .vscode/*
 !.vscode/extensions.json
+!.vscode/settings.json
 
 # macOS
 .DS_Store
@@ -42,3 +43,4 @@ sysinfo.txt
 
 # Keep our hand-written .NET project files
 !src/**/*.csproj
+!csharp_for_unity_learning.sln
