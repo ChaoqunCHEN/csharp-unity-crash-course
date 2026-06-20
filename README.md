@@ -17,16 +17,29 @@ This is for you if:
 
 ### macOS First-Class Path
 
-Install the .NET SDK:
+This course targets .NET 8 with `net8.0`. Install the .NET 8 SDK:
 
 ```bash
-brew install --cask dotnet-sdk
+brew install dotnet@8
+echo 'export DOTNET_ROOT="/opt/homebrew/opt/dotnet@8/libexec"' >> ~/.zshrc
+echo 'export PATH="/opt/homebrew/opt/dotnet@8/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
 dotnet --info
 ```
 
+If you already have a newer .NET installed, make sure the Homebrew .NET 8 path appears first:
+
+```bash
+which dotnet
+dotnet --list-sdks
+dotnet --list-runtimes
+```
+
+Expected output includes an `8.0.x` SDK and `Microsoft.NETCore.App 8.0.x`. On Apple Silicon Homebrew installs `dotnet@8` as a keg-only formula, so the `DOTNET_ROOT` and `PATH` lines above are important.
+
 If you do not use Homebrew, install the SDK from Microsoft:
 
-- https://dotnet.microsoft.com/download
+- https://dotnet.microsoft.com/download/dotnet/8.0
 
 Install Unity:
 
@@ -46,11 +59,13 @@ Common macOS Unity issues:
 
 ### Windows Path
 
-1. Install .NET SDK 8 from https://dotnet.microsoft.com/download
+1. Install .NET SDK 8 from https://dotnet.microsoft.com/download/dotnet/8.0
 2. Verify with:
 
 ```powershell
 dotnet --info
+dotnet --list-sdks
+dotnet --list-runtimes
 ```
 
 3. Install Unity Hub.
