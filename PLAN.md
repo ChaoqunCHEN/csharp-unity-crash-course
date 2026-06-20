@@ -60,4 +60,4 @@ dotnet run --project src/Day1.ConsolePlayground
 
 ## Current Environment Note
 
-This machine currently has a .NET runtime but no .NET SDK, so local `dotnet restore/build/test` cannot run here. The repository still includes complete .NET 8 project files and GitHub Actions CI; after push, remote CI is the authoritative build/test validation.
+This repository targets .NET 8 with `net8.0`. On this macOS machine, Homebrew's keg-only `dotnet@8` SDK is the expected local SDK. If another `dotnet` command appears first in `PATH`, prepend `/opt/homebrew/opt/dotnet@8/bin` and set `DOTNET_ROOT=/opt/homebrew/opt/dotnet@8/libexec` before running local restore/build/test commands.
